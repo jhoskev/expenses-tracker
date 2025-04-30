@@ -4,15 +4,21 @@
 
 const fileSystem = require('fs');
 
-const content = fstat.readFileSync('expenses.json', 'utf-8');
+const content = fileSystem.readFileSync('expenses.json', 'utf-8');
 
 const expenses = JSON.parse(content);
 
-const command = process.arg[2];
+const command = process.argv[2];
 
 switch (command) {
     case '--list':
         console.log('action for list');
+
+        for (const expense of expenses) {
+            const dateTime = new Date(expense.timestamp * 1000) ;
+            console.log(`#${expense.id} ${dateTime.toLocaleDateString('es-es')} ${expense.concept} ${expense.category} ${expense.amount} €`);
+        }
+
         break;
 
     case '--help':
