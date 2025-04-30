@@ -21,6 +21,11 @@ switch (command) {
 
         break;
 
+    case '--summary':
+        const summary = expenses.reduce((partialSum, a) => partialSum + a.amount, 0);
+        console.log(`Total expenses are: ${summary}`);
+        break;
+    
     case '--help':
         console.log('action for help');
         break;
